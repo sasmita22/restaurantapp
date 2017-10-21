@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Restaurant App</string>
+    <string name="open_drawer">Open navigation drawer</string>
+    <string name="close_drawer">Close navigation drawer</string>
+    <string-array name="data">
+        <item>Makanan</item>
+        <item>Minuman</item>
+    </string-array>
+</resources>
