@@ -17,8 +17,10 @@ import java.util.List;
 
 public class OrderMenuFragment extends Fragment {
     Context mContext;
-    public OrderMenuFragment(Context mContext) {
+    List<Food> foodList;
+    public OrderMenuFragment(Context mContext, List<Food> foodList) {
         this.mContext = mContext;
+        this.foodList = foodList;
     }
 
     public OrderMenuFragment() {
