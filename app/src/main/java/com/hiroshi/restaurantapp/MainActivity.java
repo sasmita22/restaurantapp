@@ -56,7 +56,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });*/
 
-        sectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager(),MainActivity.this);
+        List<Food> foodList = new ArrayList();
+        foodList.add(new Food("Nasi Goreng","Nasi goreng dengan bumbu khusus",22000));
+        foodList.add(new Food("Beef Steak","Didatangkan dari Itali",34000));
+
+        sectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager(),MainActivity.this,foodList);
 
         viewPager = (ViewPager) findViewById(R.id.container);
         viewPager.setAdapter(sectionPageAdapter);

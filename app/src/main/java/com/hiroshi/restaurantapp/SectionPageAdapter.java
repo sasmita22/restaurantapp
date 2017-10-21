@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Created by hiros on 10/21/2017.
@@ -11,15 +14,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class SectionPageAdapter extends FragmentPagerAdapter {
     Context mContext;
+    List<Food> foodList;
 
-    public SectionPageAdapter(FragmentManager fm, Context mContext) {
+    public SectionPageAdapter(FragmentManager fm, Context mContext, List<Food> foodList) {
         super(fm);
         this.mContext = mContext;
+        this.foodList = foodList;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return new OrderMenuFragment();
+        return new OrderMenuFragment(foodList);
     }
 
     @Override

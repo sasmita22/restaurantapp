@@ -16,10 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderMenuFragment extends Fragment {
-    Context mContext;
+
     List<Food> foodList;
-    public OrderMenuFragment(Context mContext, List<Food> foodList) {
-        this.mContext = mContext;
+    public OrderMenuFragment(List<Food> foodList) {
         this.foodList = foodList;
     }
 
@@ -32,11 +31,6 @@ public class OrderMenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.content_main,container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
-
-
-        List<Food> foodList = new ArrayList();
-        foodList.add(new Food("Nasi Goreng","Nasi goreng dengan bumbu khusus",22000));
-        foodList.add(new Food("Beef Steak","Didatangkan dari Itali",34000));
 
         ViewAdapter viewAdapter = new ViewAdapter(getContext(), foodList);
         recyclerView.setAdapter(viewAdapter);
