@@ -17,19 +17,31 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
+import com.hiroshi.restaurantapp.rest.ApiClient;
+import com.hiroshi.restaurantapp.rest.ApiInterface;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager viewPager;
     private SectionPageAdapter sectionPageAdapter;
+    private Call<List<Food>> call;
+    private ApiInterface apiService;
+    private Food food = null;
+    List<Food> foodList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +68,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });*/
 
-        List<Food> foodList = new ArrayList();
-        foodList.add(new Food("Nasi Goreng","Nasi goreng dengan bumbu khusus",22000));
-        foodList.add(new Food("Beef Steak","Didatangkan dari Itali",34000));
+        //foodList = new ArrayList();
+        /*oodList.add(new Food("Nasi Goreng","Nasi goreng dengan bumbu khusus",22000));
+        foodList.add(new Food("Beef Steak","Didatangkan dari Itali",34000));*/
+        //foodList.add(new Food(1,"Genjer","ENaaaakkkk",17000,27000));
 
-        sectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager(),MainActivity.this,foodList);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
+        if(call == null){
+            call = apiService.getMakanan();
+            Log.e("ERRORRRR",call.toString());
+        }
 
-        viewPager = (ViewPager) findViewById(R.id.container);
-        viewPager.setAdapter(sectionPageAdapter);
+        call.enqueue(new Callback<List<Food>>() {
+            @Override
+            public void onResponse(Call<List<Food>> call, Response<List<Food>> response) {
+                if (response.isSuccessful()){
+                    foodList = response.body();
+                    Log.e("Hayang Apal", String.valueOf(foodList.size()));
+                    sectionPageAdapter = new SectionPageAdapter(getSupportFragmentManager(), MainActivity.this, foodList);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabbed);
-        tabLayout.setupWithViewPager(viewPager);
+                    viewPager = (ViewPager) findViewById(R.id.container);
+                    viewPager.setAdapter(sectionPageAdapter);
+
+                    TabLayout tabLayout = (TabLayout) findViewById(R.id.tabbed);
+                    tabLayout.setupWithViewPager(viewPager);
+
+                }else{
+                    Log.e("Masuk","Asiiik");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Food>> call, Throwable t) {
+                Log.e("Failure","Aduuuhhh");
+            }
+        });
 
     }
 

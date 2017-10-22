@@ -34,8 +34,8 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.ViewHolder>{
         Food food = mFood.get(position);
 
         holder.mNama.setText(food.nama);
-        holder.mDesc.setText(food.desc);
-        holder.mHarga.setText(String.valueOf(food.harga));
+        holder.mDesc.setText(food.deskripsi);
+        holder.mHarga.setText(String.valueOf(food.harga_jual));
     }
 
     @Override

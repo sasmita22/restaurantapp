@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,13 @@ import java.util.List;
 public class SectionPageAdapter extends FragmentPagerAdapter {
     Context mContext;
     List<Food> foodList;
+    List<Food> nfoodList = new ArrayList();
 
     public SectionPageAdapter(FragmentManager fm, Context mContext, List<Food> foodList) {
         super(fm);
         this.mContext = mContext;
         this.foodList = foodList;
+
     }
 
     @Override
