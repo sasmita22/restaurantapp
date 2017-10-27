@@ -13,6 +13,7 @@ public class Food {
     String deskripsi;
     int harga_beli;
     int harga_jual;
+    String path;
 
     public Food(int id, String nama, String deskripsi, int harga_beli, int harga_jual) {
         this.id = id;
@@ -20,6 +21,10 @@ public class Food {
         this.deskripsi = deskripsi;
         this.harga_beli = harga_beli;
         this.harga_jual = harga_jual;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public int getId() {

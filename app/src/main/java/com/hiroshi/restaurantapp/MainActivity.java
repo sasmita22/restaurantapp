@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         apiService = ApiClient.getClient().create(ApiInterface.class);
         if(call == null){
             call = apiService.getMakanan();
-            Log.e("ERRORRRR",call.toString());
         }
 
         call.enqueue(new Callback<List<Food>>() {
